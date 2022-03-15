@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		name="ds">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost/3306/databaseNmae" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+
+	<bean class="org.springframework.jdbc.core.JdcTemplate"
+		name="jdbcTemplate">
+		<property name="dataSource">
+			<ref bean="ds" />
+		</property>
+	</bean>
+
+	<bean class="com.spring.jdbc.dao.StudentDaoImpl" name="studentDao">
+		<property name="jdbcTemplat" ref="jdbcTemplate" />
+	</bean>
+<!--	ab kya hoga ki studentDao ka jab bhi object banega to jdbcTemplate wale variable me (inside StudentDaoImpl class) container kya karega ki JdcTemplate ka object daal dega 
+		ab template ka object nahi nikalna hai ab hame studentDao ka object nikalna hai App me getBean() use karke-->
+</beans>
