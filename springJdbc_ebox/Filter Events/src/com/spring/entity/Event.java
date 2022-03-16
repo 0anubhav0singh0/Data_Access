@@ -50,4 +50,8 @@ public class Event {
         this.hall = hall;
 	}
 
+	@Override
+	public String toString(){
+		return String.format("%-15s %-15s %-15s %-15s %-15s %s\n",id,eventName,organiser,organiserNumber, hall.getName(), hall.getLocation());
+	}
 }
